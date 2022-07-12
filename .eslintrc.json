@@ -13,8 +13,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "prettier",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "prettier/prettier": "error"
