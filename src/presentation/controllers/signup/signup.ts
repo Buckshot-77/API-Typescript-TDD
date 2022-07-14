@@ -1,4 +1,4 @@
-import { IHttpRequest, IHttpResponse, IEmailValidator, IController } from './signup-protocols';
+import { IHttpRequest, IHttpResponse, IEmailValidator, IController } from './protocols';
 import { MissingParamError, InvalidParamError } from '../../errors';
 import { badRequest, ok, serverError } from '../../../helpers/http-helper';
 import { IAddAccount } from '../../../domain/useCases/add-account';
@@ -13,7 +13,7 @@ export default class SignUpController implements IController {
     this.addAccount = addAccount;
   }
 
-  handle(httpRequest: IHttpRequest): IHttpResponse {
+  async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const requiredFields = ['name', 'email', 'password', 'passwordConfirmation'];
 
@@ -35,7 +35,7 @@ export default class SignUpController implements IController {
         return badRequest(new InvalidParamError('email'));
       }
 
-      const account = this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password,
