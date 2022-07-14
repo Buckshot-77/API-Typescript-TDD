@@ -1,10 +1,9 @@
 import { IHttpRequest, IHttpResponse } from '../protocols/IHttp';
 import { MissingParamError } from '../errors/missing-param-error';
-import { badRequest } from '../../helpers/http-helper';
+import { badRequest, serverError } from '../../helpers/http-helper';
 import { IController } from '../protocols/IController';
 import { IEmailValidator } from '../protocols/IEmailValidator';
 import { InvalidParamError } from '../errors/invalid-param-error';
-import { ServerError } from '../errors/server-error';
 
 export default class SignUpController implements IController {
   private readonly emailValidator: IEmailValidator;
@@ -34,10 +33,7 @@ export default class SignUpController implements IController {
         body: { message: 'ok' },
       };
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: new ServerError(),
-      };
+      return serverError();
     }
   }
 }
