@@ -8,14 +8,30 @@ interface ISutTypes {
   emailValidatorStub: IEmailValidator;
 }
 
-const makeSut = (): ISutTypes => {
+const makeEmailValidator = (): IEmailValidator => {
   class EmailValidatorStub implements IEmailValidator {
     // eslint-disable-next-line no-unused-vars
     isValid(email: string): boolean {
       return true;
     }
   }
-  const emailValidatorStub = new EmailValidatorStub();
+
+  return new EmailValidatorStub();
+};
+
+const makeEmailValidatorWithError = (): IEmailValidator => {
+  class EmailValidatorStub implements IEmailValidator {
+    // eslint-disable-next-line no-unused-vars
+    isValid(email: string): boolean {
+      throw new Error();
+    }
+  }
+
+  return new EmailValidatorStub();
+};
+
+const makeSut = (): ISutTypes => {
+  const emailValidatorStub = makeEmailValidator();
   const sut = new SignUpController(emailValidatorStub);
 
   return {
@@ -119,14 +135,7 @@ describe('SignUp Controller', () => {
   });
 
   test('Should return 500 if EmailValidator throws an error', () => {
-    class EmailValidatorStub implements IEmailValidator {
-      // eslint-disable-next-line no-unused-vars
-      isValid(email: string): boolean {
-        throw new Error();
-      }
-    }
-
-    const emailValidatorStub = new EmailValidatorStub();
+    const emailValidatorStub = makeEmailValidatorWithError();
     const systemUnderTest = new SignUpController(emailValidatorStub);
     const httpRequest = {
       body: {
