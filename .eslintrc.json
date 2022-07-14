@@ -65,6 +65,12 @@
                     "match": true
                 }
             }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            "ForInStatement",
+            "LabeledStatement",
+            "WithStatement"
         ]
     },
     "settings": {
