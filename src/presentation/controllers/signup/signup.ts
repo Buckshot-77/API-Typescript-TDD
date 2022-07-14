@@ -1,7 +1,7 @@
 import { IHttpRequest, IHttpResponse, IEmailValidator, IController } from './protocols';
 import { MissingParamError, InvalidParamError } from '../../errors';
 import { badRequest, ok, serverError } from '../../../helpers/http-helper';
-import { IAddAccount } from '../../../domain/useCases/add-account';
+import { IAddAccount } from '../../../domain/useCases/protocols/IAddAccount';
 
 export default class SignUpController implements IController {
   private readonly emailValidator: IEmailValidator;
@@ -42,6 +42,8 @@ export default class SignUpController implements IController {
       });
       return ok(account);
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       return serverError();
     }
   }

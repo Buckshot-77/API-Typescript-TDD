@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:staged": "jest --passWithNoTests",
-    "test:watch": "jest --passWithNoTests --watch",
+    "test": "jest --passWithNoTests --silent --coverage=false --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:staged": "yarn test --noStackTrace --findRelatedTests",
+    "test:unit": "jest --passWithNoTests --silent --coverage=false --watch -c jest-unit-config.js",
+    "test:integration": "yarn test --watch -c jest-integration-config.js --runInBand",
+    "test:ci": "jest --passWithNoTests --silent",
     "lint:staged": "lint-staged"
   },
   "keywords": [],
