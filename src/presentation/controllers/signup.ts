@@ -1,7 +1,7 @@
-import { IHttpRequest, IHttpResponse } from '../protocols/http';
+import { IHttpRequest, IHttpResponse } from '../protocols/IHttp';
 import { MissingParamError } from '../errors/missing-param-error';
 import { badRequest } from '../../helpers/http-helper';
-import { IController } from '../protocols/controller';
+import { IController } from '../protocols/IController';
 
 export default class SignUpController implements IController {
   handle(httpRequest: IHttpRequest): IHttpResponse {
