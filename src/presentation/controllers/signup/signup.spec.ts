@@ -1,9 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import SignUpController from './signup';
-import { MissingParamError, InvalidParamError, ServerError } from '../errors';
-import { IEmailValidator } from '../protocols';
-import { IAddAccount, IAddAccountModel } from '../../domain/useCases/add-account';
-import { IAccountModel } from '../../domain/models/account';
+import { MissingParamError, InvalidParamError, ServerError } from '../../errors';
+import { IEmailValidator, IAddAccount, IAddAccountModel, IAccountModel } from './signup-protocols';
 
 const makeEmailValidator = (): IEmailValidator => {
   class EmailValidatorStub implements IEmailValidator {
