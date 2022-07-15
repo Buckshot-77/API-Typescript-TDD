@@ -6,8 +6,8 @@ interface ISutTypes {
   encrypterStub: IEncrypter;
 }
 
-const makeSut = (): ISutTypes => {
-  class EncrypterStub {
+const makeEncrypter = (): IEncrypter => {
+  class EncrypterStub implements IEncrypter {
     // eslint-disable-next-line no-unused-vars
     async encrypt(password: string): Promise<string> {
       return new Promise(resolve => {
@@ -16,7 +16,11 @@ const makeSut = (): ISutTypes => {
     }
   }
 
-  const encrypterStub = new EncrypterStub();
+  return new EncrypterStub();
+};
+
+const makeSut = (): ISutTypes => {
+  const encrypterStub = makeEncrypter();
   const sut = new DbAddAccount(encrypterStub);
 
   return {
