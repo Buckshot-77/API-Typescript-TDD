@@ -5,7 +5,12 @@
 
 const config = {
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!src/**/protocols/*.ts', '!src/**/models/*.ts'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.ts',
+    '!src/**/protocols/*.ts',
+    '!src/**/models/*.ts',
+    '!src/**/**/protocols.ts',
+  ],
 
   coverageDirectory: 'coverage',
 
