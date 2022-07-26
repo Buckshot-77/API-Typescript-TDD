@@ -11,6 +11,7 @@ const config = {
     '!src/**/models/*.ts',
     '!src/**/**/protocols.ts',
   ],
+  preset: '@shelf/jest-mongodb',
 
   coverageDirectory: 'coverage',
 
