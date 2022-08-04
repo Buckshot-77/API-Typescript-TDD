@@ -14,4 +14,19 @@ export const MongoHelper = {
   getCollection(name: string): Collection {
     return this.client.db().collection(name);
   },
+
+  map(collection: any): any {
+    const { _id, ...collectionWithoutId } = collection;
+
+    const mappedCollection = {
+      id: _id.toString(),
+      ...collectionWithoutId,
+    };
+
+    if (mappedCollection.password) {
+      delete mappedCollection.password;
+    }
+
+    return mappedCollection;
+  },
 };
